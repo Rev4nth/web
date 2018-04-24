@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} Conduit {% endblock %}
+
+{% block content %}
+    {% include 'web/_nav.html' %}
+    <ul class="nav nav-tabs mt-4">
+        <li class="nav-item">
+            <a class="nav-link" href="/user_feed/">Your Feed</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/">Global Feed</a>
+        </li>
+    </ul>
+
+    {% for article in articles %}
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5>{{ article.title }}</h5>
+            <p>{{ article.about }}</p>
+            <a href="{% url 'article_detail' article.id %}">more</a>
+            <div>
+                <a class="btn btn-outline-primary" href="{% url 'make_favourite' article.id %}"> {{ article.likes }} Likes </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
